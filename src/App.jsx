@@ -3,14 +3,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AuthorizedUserLayout from "./components/AuthorizedUserLayout";
 import Books from "./pages/Books";
-
-import EditProfile from "./pages/EditProfile";
-import UnauthorizedUserLayout from "./components/UnauthorizedUserLayout";
-import AvailableBooks from "./pages/AvailableBooks";
-import ProtectedRoutes from "./components/ProtectedRoutes";
 import LoggedUserInformation from "./pages/LoggedUserInformation";
+import EditProfile from "./pages/EditProfile";
+
+import AvailableBooks from "./pages/AvailableBooks";
+import UnauthorizedUserLayout from "./components/UnauthorizedUserLayout";
+import AuthorizedUserLayout from "./components/AuthorizedUserLayout";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const queryClient = new QueryClient();
 

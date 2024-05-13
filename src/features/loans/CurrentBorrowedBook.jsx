@@ -6,7 +6,7 @@ import { formatDate } from "../../utils/helpers";
 import { useGetCurrentLoan } from "./useGetCurrentLoan";
 export function CurrentBorrowedBook() {
   const { user } = useAuth();
-  const { returnBook, isPending: returingBook } = useRetrieveBook(
+  const { returnBook, isPending: returningBook } = useRetrieveBook(
     user?._currentLoanId,
   );
 
@@ -39,8 +39,8 @@ export function CurrentBorrowedBook() {
         </p>
       </div>
       <div>
-        <Button type="bookCard" onClick={returnBook}>
-          {!returingBook ? "Return the book" : <SmallSpinner />}
+        <Button type="primary" onClick={returnBook}>
+          {!returningBook ? "Return the book" : <SmallSpinner />}
         </Button>
       </div>
     </div>

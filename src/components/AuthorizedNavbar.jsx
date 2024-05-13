@@ -23,26 +23,30 @@ export default function AuthorizedNavbar() {
           <SmallSpinner />
         )}
       </div>
-      <NavLink type="sidebar" currentTab="/availablebooks" to="availablebooks">
+      <NavLink
+        type="secondary"
+        currentTab="/availablebooks"
+        to="availablebooks"
+      >
         <span>
           <IoBookSharp />
         </span>
         <span className="ml-1">Borrow a book</span>
       </NavLink>
-      <NavLink type="sidebar" currentTab="/your-books" to="your-books">
+      <NavLink type="secondary" currentTab="/your-books" to="your-books">
         <span>
           <IoBookSharp />
         </span>
         <span className="ml-1">Your books</span>
       </NavLink>
-      <NavLink type="sidebar" currentTab="/edit" to="edit">
+      <NavLink type="secondary" currentTab="/edit" to="edit">
         <span>
           <RiEdit2Line size="1.2em" />
         </span>
         <span className="ml-1">Edit your profile</span>
       </NavLink>
       <Button
-        type="logout"
+        type="primary"
         onClick={() => {
           setUser(null);
           logout();

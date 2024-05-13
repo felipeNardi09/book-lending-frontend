@@ -35,10 +35,10 @@ export default function LoginForm() {
         />
       </div>
       <div className="text-center">
-        <NavLink type="default">Forgot your password?</NavLink>
+        <NavLink type="primary">Forgot your password?</NavLink>
       </div>
       <div className="mt-2 flex justify-center">
-        <Button type="logout" disabled={isPending}>
+        <Button type="primary" disabled={isPending}>
           {!isPending ? "Log in" : <SmallSpinner />}
         </Button>
       </div>

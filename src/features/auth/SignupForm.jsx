@@ -50,12 +50,30 @@ export default function SignupForm() {
           label="Confirm password"
           placeholder="Passwords must match"
         />
+        <div className="flex gap-3 self-center px-2 py-1">
+          <label htmlFor="isAdmin">Role:</label>
+          <select
+            className="min-w-20 border border-slate-300"
+            {...register("isAdmin")}
+            name="isAdmin"
+            id="isAdmin"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
         <div className="mt-2 flex justify-center">
-          <Button type="logout">
+          <Button type="primary">
             {!isPending ? "Sign up" : <SmallSpinner />}
           </Button>
         </div>
-        {error && <p>{error.message}</p>}
+        {error && (
+          <div className="mt-1 inline-block max-w-36 bg-red-300 text-center">
+            <p>
+              <span>{error.message}</span>
+            </p>
+          </div>
+        )}
       </form>
     </>
   );

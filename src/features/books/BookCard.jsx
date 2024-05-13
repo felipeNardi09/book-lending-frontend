@@ -1,31 +1,24 @@
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+
+import { useCreateLoan } from "../loans/useCreateLoan";
+import LoanRules from "../loans/LoanRules";
+
 import Button from "../../components/Button";
 import NavLink from "../../components/NavLink";
 import SmallSpinner from "../../components/SmallSpinner";
-import { useAuth } from "../../contexts/AuthContext";
-import { useCreateLoan } from "../loans/useCreateLoan";
 import Modal from "../../components/Modal";
 import BookInfo from "./BookInfo";
-import LoanRules from "../loans/LoanRules";
 
 const styledTitle = "font-semibold text-md";
 
 /* eslint-disable react/prop-types */
-export default function BookCard({
-  id,
-  title,
-  author,
-  language,
-  genre,
-  synopsis,
-  publisher,
-  publicationDate,
-  numberOfPages,
-  numberOfCopies,
-}) {
+export default function BookCard({ book }) {
+  const { _id, title, author, synopsis, numberOfCopies } = book;
+
   const [openBookInfo, setOpenBookInfo] = useState(false);
   const [openLoanInfo, setOpenLoanInfo] = useState(false);
-  const { borrowTheBook, isPending } = useCreateLoan(id);
+  const { borrowTheBook, isPending } = useCreateLoan(_id);
 
   const { user } = useAuth();
 
@@ -47,18 +40,12 @@ export default function BookCard({
       ) : (
         <>
           {!user.currentBorrowedBookId ? (
-            <Button
-              type="bookCard"
-              onClick={() => {
-                borrowTheBook();
-              }}
-              disable={isPending}
-            >
+            <Button type="primary" onClick={borrowTheBook} disable={isPending}>
               {!isPending ? "Borrow" : <SmallSpinner />}
             </Button>
           ) : (
             <Button
-              type="returnBook"
+              type="primary"
               onClick={() => setOpenLoanInfo((curState) => !curState)}
             >
               About the loans
@@ -67,25 +54,14 @@ export default function BookCard({
         </>
       )}
       <Button
-        type="bookCard"
+        type="primary"
         onClick={() => setOpenBookInfo((curValue) => !curValue)}
       >
         More information
       </Button>
       {openBookInfo && (
         <Modal onClose={() => setOpenBookInfo(false)}>
-          <BookInfo
-            id={id}
-            title={title}
-            author={author}
-            language={language}
-            genre={genre}
-            synopsis={synopsis}
-            publisher={publisher}
-            publicationDate={publicationDate}
-            numberOfPages={numberOfPages}
-            numberOfCopies={numberOfCopies}
-          />
+          <BookInfo id={_id} book={book} />
         </Modal>
       )}
       {openLoanInfo && (

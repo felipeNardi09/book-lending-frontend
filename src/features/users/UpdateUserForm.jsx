@@ -36,7 +36,7 @@ export default function UpdateUserForm() {
           label="E-mail"
           placeholder="Update your e-mail"
         />
-        <Button type="bookCard">
+        <Button type="primary">
           {!isPending ? "Update" : <SmallSpinner />}
         </Button>
       </form>
