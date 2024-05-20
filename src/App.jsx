@@ -11,6 +11,10 @@ import AvailableBooks from "./pages/AvailableBooks";
 import UnauthorizedUserLayout from "./components/UnauthorizedUserLayout";
 import AuthorizedUserLayout from "./components/AuthorizedUserLayout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import AdminRoutes from "./components/AdminRoutes";
+import BooksDashboard from "./pages/BooksDashboard";
+import UsersDashboard from "./pages/UsersDashboard";
+import LoansDashboard from "./pages/LoansDashboard";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +36,22 @@ function App() {
               <Route path="availablebooks" element={<AvailableBooks />} />
               <Route path="your-books" element={<LoggedUserInformation />} />
               <Route path="edit" element={<EditProfile />} />
+            </Route>
+
+            <Route
+              element={
+                <AdminRoutes>
+                  <AuthorizedUserLayout />
+                </AdminRoutes>
+              }
+            >
+              <Route
+                index
+                element={<Navigate replace to="/booksDashboard" />}
+              />
+              <Route path="booksDashboard" element={<BooksDashboard />} />
+              <Route path="usersDashboard" element={<UsersDashboard />} />
+              <Route path="loansDashboard" element={<LoansDashboard />} />
             </Route>
 
             <Route element={<UnauthorizedUserLayout />}>

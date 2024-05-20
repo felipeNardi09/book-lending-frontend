@@ -114,3 +114,19 @@ export async function updateUser(token, userData) {
 
   return data;
 }
+export async function getUsers(token) {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token && `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  const data = await response.json();
+
+  return data;
+}

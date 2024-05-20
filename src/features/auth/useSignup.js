@@ -19,7 +19,10 @@ export function useSignup() {
       console.log(user);
       setCookie("token", user.data.token.token);
       setCookie("iat", user.data.token.iat);
-      navigate("/availablebooks");
+
+      user.data.user.role === "admin"
+        ? navigate("/booksDashboard")
+        : navigate("/availablebooks");
     },
     onError: (error) => {
       console.log(error);

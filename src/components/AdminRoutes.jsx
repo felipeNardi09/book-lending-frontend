@@ -1,24 +1,21 @@
-/* eslint-disable react/prop-types */
-import { useLocation, useNavigate } from "react-router-dom";
-import { useCurrentUser } from "../features/users/useCurrentUser";
-import { useAuth } from "../contexts/AuthContext";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { useCookies } from "react-cookie";
+import { useCurrentUser } from "../features/users/useCurrentUser";
 import SmallSpinner from "./SmallSpinner";
 
-export default function ProtectedRoutes({ children }) {
+export default function AdminRoutes({ children }) {
   const { currentUser, isLoading, isSuccess } = useCurrentUser();
   const { user, setUser, setIsLoading } = useAuth();
   const navigate = useNavigate();
   const [cookies] = useCookies();
-  const { pathname } = useLocation();
-  console.log(pathname);
 
   useEffect(
     function () {
-      if (!user && !cookies.token) navigate("/login");
+      if (!cookies.token) navigate("/login");
 
-      if (user?.role === "admin") navigate("/booksDashboard");
+      if (user?.role !== "admin" && cookies.token) navigate("/availablebooks");
 
       if (isLoading) {
         setIsLoading(true);
@@ -29,7 +26,6 @@ export default function ProtectedRoutes({ children }) {
       if (isSuccess) setUser(currentUser.data);
     },
     [
-      user,
       currentUser,
       isSuccess,
       setUser,
@@ -37,6 +33,7 @@ export default function ProtectedRoutes({ children }) {
       cookies.token,
       isLoading,
       setIsLoading,
+      user?.role,
     ],
   );
 

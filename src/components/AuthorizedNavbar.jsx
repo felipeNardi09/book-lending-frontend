@@ -23,28 +23,56 @@ export default function AuthorizedNavbar() {
           <SmallSpinner />
         )}
       </div>
-      <NavLink
-        type="secondary"
-        currentTab="/availablebooks"
-        to="availablebooks"
-      >
-        <span>
-          <IoBookSharp />
-        </span>
-        <span className="ml-1">Borrow a book</span>
-      </NavLink>
-      <NavLink type="secondary" currentTab="/your-books" to="your-books">
-        <span>
-          <IoBookSharp />
-        </span>
-        <span className="ml-1">Your books</span>
-      </NavLink>
-      <NavLink type="secondary" currentTab="/edit" to="edit">
-        <span>
-          <RiEdit2Line size="1.2em" />
-        </span>
-        <span className="ml-1">Edit your profile</span>
-      </NavLink>
+      {user?.role === "admin" ? (
+        <>
+          <NavLink
+            type="secondary"
+            currentTab="/booksDashboard"
+            to="/booksDashboard"
+          >
+            Books
+          </NavLink>
+          <NavLink
+            type="secondary"
+            currentTab="/usersDashboard"
+            to="/usersDashboard"
+          >
+            Users
+          </NavLink>
+          <NavLink
+            type="secondary"
+            currentTab="/loansDashboard"
+            to="/loansDashboard"
+          >
+            Loans
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink
+            type="secondary"
+            currentTab="/availablebooks"
+            to="availablebooks"
+          >
+            <span>
+              <IoBookSharp />
+            </span>
+            <span className="ml-1">Borrow a book</span>
+          </NavLink>
+          <NavLink type="secondary" currentTab="/your-books" to="your-books">
+            <span>
+              <IoBookSharp />
+            </span>
+            <span className="ml-1">Your books</span>
+          </NavLink>
+          <NavLink type="secondary" currentTab="/edit" to="edit">
+            <span>
+              <RiEdit2Line size="1.2em" />
+            </span>
+            <span className="ml-1">Edit your profile</span>
+          </NavLink>
+        </>
+      )}
       <Button
         type="primary"
         onClick={() => {

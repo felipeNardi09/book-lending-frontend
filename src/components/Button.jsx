@@ -7,6 +7,8 @@ export default function Button({ children, onClick, disabled, type }) {
     primary: `${base} flex justify-center items-center py-2 text-white bg-emerald-400 hover:bg-emerald-500`,
     modal:
       "bg-none p-1 border transform translate-x-2 transition-all duration-100 absolute top-2 right-4 hover:bg-slate-300",
+    table:
+      "p-2 rounded-full transition-all duration-200 bg-gray-200 hover:bg-orange-400 border-2 border-slate-200",
   };
 
   return (

@@ -16,24 +16,31 @@ export default function LoginForm() {
         login(data);
       })}
     >
-      <div>
-        <FormField
-          register={register}
-          htmlFor="email"
-          type="email"
-          id="email"
-          label="E-mail"
-          placeholder="youremailaccount@email.com"
-        />
-        <FormField
-          register={register}
-          htmlFor="password"
-          type="password"
-          id="password"
-          label="Password"
-          placeholder="Enter your password"
-        />
-      </div>
+      <FormField
+        htmlTag="input"
+        divStyle="flex"
+        labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+        inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
+        register={register}
+        htmlFor="email"
+        type="email"
+        id="email"
+        label="E-mail"
+        placeholder="youremailaccount@email.com"
+      />
+      <FormField
+        htmlTag="input"
+        divStyle="flex"
+        labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+        inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
+        register={register}
+        htmlFor="password"
+        type="password"
+        id="password"
+        label="Password"
+        placeholder="Enter your password"
+      />
+
       <div className="text-center">
         <NavLink type="primary">Forgot your password?</NavLink>
       </div>

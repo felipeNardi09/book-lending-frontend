@@ -16,9 +16,13 @@ export default function SignupForm() {
         onSubmit={handleSubmit((data) => {
           signup(data);
         })}
-        className="flex min-w-[24em] flex-col px-4 py-2 md:min-w-[32em]"
+        className="flex min-w-[24em] flex-col gap-1 px-4 py-2 md:min-w-[32em]"
       >
         <FormField
+          htmlTag="input"
+          divStyle="flex"
+          labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+          inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
           register={register}
           htmlFor="name"
           type="text"
@@ -27,6 +31,10 @@ export default function SignupForm() {
           placeholder="Enter your fullname"
         />
         <FormField
+          htmlTag="input"
+          divStyle="flex"
+          labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+          inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
           register={register}
           htmlFor="email"
           type="email"
@@ -35,6 +43,10 @@ export default function SignupForm() {
           placeholder="youremailaccount@email.com"
         />
         <FormField
+          htmlTag="input"
+          divStyle="flex"
+          labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+          inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
           register={register}
           htmlFor="password"
           type="password"
@@ -43,6 +55,10 @@ export default function SignupForm() {
           placeholder="Must contain at least 8 characters"
         />
         <FormField
+          htmlTag="input"
+          divStyle="flex"
+          labelStyle="mb-1 block basis-2/6  p-2.5  text-center text-sm font-medium text-emerald-900 dark:text-emerald-900"
+          inputStyle="block w-full basis-4/6 border-2 border-emerald-400 p-2.5 text-sm text-emerald-900"
           register={register}
           htmlFor="confirmPassword"
           type="password"
@@ -54,9 +70,9 @@ export default function SignupForm() {
           <label htmlFor="isAdmin">Role:</label>
           <select
             className="min-w-20 border border-slate-300"
-            {...register("isAdmin")}
-            name="isAdmin"
-            id="isAdmin"
+            {...register("role")}
+            name="role"
+            id="role"
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>
