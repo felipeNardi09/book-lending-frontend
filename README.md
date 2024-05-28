@@ -6,7 +6,7 @@ This is the frontend of the [Bookify](https://github.com/felipeNardi09/book-lend
 
 The project is being developed for learning and portfolio purposes. It was built using React with [Vite](https://vitejs.dev/), [React Router](https://reactrouter.com/en/main),[Tanstack Query](https://tanstack.com/query/latest/docs/framework/react/overview), [TailwindCSS](https://tailwindcss.com/), [React Hook Form](https://react-hook-form.com/) and more.
 
-Some features yet to be implemented: books creation and admin's dashboard.
+Some features yet to be implemented: update user's password and forgot password page.
 
 ### Installing
 Install the project dependencies:
