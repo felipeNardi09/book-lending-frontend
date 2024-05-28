@@ -1,11 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateUser } from "../../services/apiUsers";
-import { useCookies } from "react-cookie";
+import { reactivateAccount } from "../../services/apiUsers";
 import toast from "react-hot-toast";
 
-export function useUpdateUser() {
-  const [cookies] = useCookies("jwt");
-
+export function useReactivateUser() {
   const {
     mutate,
     data: user,
@@ -14,10 +11,10 @@ export function useUpdateUser() {
     isSuccess,
   } = useMutation({
     mutationFn: (data) => {
-      return updateUser(cookies.token, data);
+      return reactivateAccount(data);
     },
     onSuccess: () => {
-      toast.success("User has been updated");
+      toast.success("You can now log in");
     },
     onError: (error) => {
       toast.error(error.message);

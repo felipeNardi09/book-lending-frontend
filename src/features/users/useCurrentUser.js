@@ -8,7 +8,7 @@ export function useCurrentUser() {
   const {
     data: currentUser,
     error,
-    isLoading,
+    isPending,
     isSuccess,
     isFetching,
   } = useQuery({
@@ -17,5 +17,5 @@ export function useCurrentUser() {
     retry: 1,
   });
 
-  return { currentUser, error, isLoading, isSuccess, isFetching };
+  return { currentUser, error, isPending, isSuccess, isFetching };
 }

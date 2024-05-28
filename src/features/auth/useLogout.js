@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logOut } from "../../services/apiUsers";
+import { toast } from "react-hot-toast";
 
 export function useLogout() {
   const [cookie, , removeCookie] = useCookies("jwt");
@@ -20,9 +21,13 @@ export function useLogout() {
       removeCookie("iat");
       queryClient.invalidateQueries("user");
       navigate("/signup");
+      toast("See you later!", {
+        icon: "✌️",
+        style: { border: "2px solid yellow" },
+      });
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
   });
 

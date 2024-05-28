@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login as loginRequest } from "../../services/apiUsers";
 import { useCookies } from "react-cookie";
 import { useAuth } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 export function useLogin() {
   const [, setCookie] = useCookies("jwt");
@@ -28,7 +29,7 @@ export function useLogin() {
         : navigate("/availablebooks");
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
   });
 

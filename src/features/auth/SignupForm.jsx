@@ -4,11 +4,14 @@ import { useSignup } from "./useSignup";
 import Button from "../../components/Button";
 import FormField from "../../components/FormField";
 import SmallSpinner from "../../components/SmallSpinner";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignupForm() {
   const { signup, error, isPending } = useSignup();
 
   const { register, handleSubmit } = useForm();
+
+  const { user } = useAuth();
 
   return (
     <>
@@ -83,13 +86,7 @@ export default function SignupForm() {
             {!isPending ? "Sign up" : <SmallSpinner />}
           </Button>
         </div>
-        {error && (
-          <div className="mt-1 inline-block max-w-36 bg-red-300 text-center">
-            <p>
-              <span>{error.message}</span>
-            </p>
-          </div>
-        )}
+        {error && <p className="text-center">{error.message}</p>}
       </form>
     </>
   );

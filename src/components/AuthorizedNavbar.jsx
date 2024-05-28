@@ -7,6 +7,7 @@ import Button from "./Button";
 import NavLink from "./NavLink";
 import Title from "./Title";
 import SmallSpinner from "./SmallSpinner";
+import Logo from "./Logo";
 
 export default function AuthorizedNavbar() {
   const { logout, isPending } = useLogout();
@@ -15,7 +16,10 @@ export default function AuthorizedNavbar() {
 
   return (
     <div className="col-start-1 col-end-2 row-start-1 row-end-4 flex flex-col justify-center gap-4">
-      <Title />
+      <div className="flex flex-col items-center">
+        <Logo />
+        <Title />
+      </div>
       <div className="text-center">
         {!isLoading ? (
           <h2>Welcome, {user?.name.split(" ")[0]}</h2>
@@ -74,7 +78,7 @@ export default function AuthorizedNavbar() {
         </>
       )}
       <Button
-        type="primary"
+        type="secondary"
         onClick={() => {
           setUser(null);
           logout();

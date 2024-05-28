@@ -1,46 +1,60 @@
 /* eslint-disable react/prop-types */
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "../features/users/useCurrentUser";
 import { useAuth } from "../contexts/AuthContext";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import SmallSpinner from "./SmallSpinner";
 
+const userRoutes = ["/availaboebooks", "/your-books", "/edit"];
+const adminRoutes = ["/booksDashboard", "/usersDashboard", "/loansDashboard"];
+
 export default function ProtectedRoutes({ children }) {
-  const { currentUser, isLoading, isSuccess } = useCurrentUser();
-  const { user, setUser, setIsLoading } = useAuth();
+  const { currentUser, isPending } = useCurrentUser();
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
-  const [cookies] = useCookies();
-  const { pathname } = useLocation();
-  console.log(pathname);
+  const location = useLocation();
+  const [cookies, setCookie] = useCookies();
 
   useEffect(
     function () {
-      if (!user && !cookies.token) navigate("/login");
-
-      if (user?.role === "admin") navigate("/booksDashboard");
-
-      if (isLoading) {
-        setIsLoading(true);
-      } else {
-        setIsLoading(false);
+      if (!cookies.token) {
+        setUser(null);
+        navigate("/login");
       }
 
-      if (isSuccess) setUser(currentUser.data);
+      if (!isPending) {
+        setUser(currentUser?.data);
+      }
+
+      if (
+        currentUser?.data.role === "admin" &&
+        !adminRoutes.includes(location.pathname)
+      ) {
+        navigate("/booksDashboard");
+      }
+
+      if (
+        currentUser?.data.role === "user" &&
+        !userRoutes.includes(location.pathname)
+      ) {
+        navigate("/availablebooks");
+      }
     },
     [
       user,
       currentUser,
-      isSuccess,
       setUser,
       navigate,
+      isPending,
       cookies.token,
-      isLoading,
-      setIsLoading,
+      cookies.iat,
+      setCookie,
+      location.pathname,
     ],
   );
 
-  if (isLoading || !user) <SmallSpinner />;
+  if (isPending || !user) <SmallSpinner />;
 
   return children;
 }

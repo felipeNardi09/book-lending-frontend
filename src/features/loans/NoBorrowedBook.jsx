@@ -9,7 +9,7 @@ export default function NoBorrowedBook() {
       {user?._loanId.length !== 0 && (
         <div className="flex items-center gap-4 border border-blue-500 px-3 py-2">
           <p>Borrow a book</p>
-          <NavLink type="toLoginPage" to="/availableBooks">
+          <NavLink type="tertiary" to="/availableBooks">
             See available books
           </NavLink>
         </div>

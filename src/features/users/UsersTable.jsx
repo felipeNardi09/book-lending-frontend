@@ -9,16 +9,19 @@ import Spinner from "../../components/Spinner";
 import { formatDate } from "../../utils/helpers";
 import TableDataCell from "../../components/TableDataCell";
 import TableHeaderCell from "../../components/TableHeaderCell";
+import { useDeleteUser } from "./useDeleteUser";
 
 export default function UsersTable() {
   const { data, isLoading } = useUsers();
 
+  const { mutate: deleteUser, isPending } = useDeleteUser();
+
   return (
     <div className="p-4">
-      {!isLoading ? (
+      {!isLoading || !isPending ? (
         <>
           <Table>
-            <caption className="font-lg m-2">Users</caption>
+            <caption className="m-2 text-lg">Users</caption>
             <TableHead>
               <TableRow className="dark:bg-gray-600 dark:text-white">
                 <TableHeaderCell>ID</TableHeaderCell>
@@ -28,6 +31,7 @@ export default function UsersTable() {
                 <TableHeaderCell>Current loan</TableHeaderCell>
                 <TableHeaderCell>Register date</TableHeaderCell>
                 <TableHeaderCell>Updated at</TableHeaderCell>
+                <TableHeaderCell>Active</TableHeaderCell>
                 <TableHeaderCell>Delete</TableHeaderCell>
               </TableRow>
             </TableHead>
@@ -46,8 +50,19 @@ export default function UsersTable() {
                   </TableDataCell>
                   <TableDataCell>{formatDate(user.createdAt)}</TableDataCell>
                   <TableDataCell>{formatDate(user.updatedAt)}</TableDataCell>
+                  <TableDataCell>
+                    {user.isActive ? (
+                      <span className="font-bold text-green-500">Yes</span>
+                    ) : (
+                      <span className="font-bold text-red-500">No</span>
+                    )}
+                  </TableDataCell>
                   <TableDataCell className="px-1">
-                    <Button type="table">
+                    <Button
+                      disabled={!user.isActive}
+                      onClick={() => deleteUser(user._id)}
+                      type="table"
+                    >
                       <MdDeleteOutline />
                     </Button>
                   </TableDataCell>

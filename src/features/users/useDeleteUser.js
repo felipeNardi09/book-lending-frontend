@@ -1,25 +1,27 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteUserById } from "../../services/apiUsers";
 import { useCookies } from "react-cookie";
-import { retrieveBook } from "../../services/apiLoans";
 import toast from "react-hot-toast";
 
-export function useRetrieveBook(id) {
-  const [cookie] = useCookies("jwt");
+export function useDeleteUser() {
+  const [cookies] = useCookies("jwt");
   const queryClient = useQueryClient();
-
   const {
-    mutate: returnBook,
+    mutate,
+    data: user,
     error,
     isPending,
     isSuccess,
   } = useMutation({
-    mutationFn: () => retrieveBook(id, cookie.token),
-    onSuccess: () => {
-      queryClient.invalidateQueries("users");
-      queryClient.invalidateQueries("book");
+    mutationFn: (data) => {
+      return deleteUserById(cookies.token, data);
+    },
+    onSuccess: (data) => {
+      console.log(data);
 
-      toast("Book has been returned!", {
-        icon: "👌",
+      queryClient.invalidateQueries("users");
+
+      toast(`${data.user.name} is now inactive`, {
         style: { border: "2px solid yellow" },
       });
     },
@@ -28,5 +30,5 @@ export function useRetrieveBook(id) {
     },
   });
 
-  return { returnBook, error, isPending, isSuccess };
+  return { mutate, user, error, isPending, isSuccess };
 }

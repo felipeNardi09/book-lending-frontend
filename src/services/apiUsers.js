@@ -130,3 +130,61 @@ export async function getUsers(token) {
 
   return data;
 }
+export async function deleteUser(token) {
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/v1/users/delete-user`,
+    {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        Authorization: token && `Bearer ${token}`,
+      },
+    },
+  );
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  const data = await res.json();
+
+  return data;
+}
+export async function deleteUserById(token, userId) {
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/v1/users/delete-by-id/${userId}`,
+    {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        Authorization: token && `Bearer ${token}`,
+      },
+    },
+  );
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  const data = await res.json();
+
+  return data;
+}
+export async function reactivateAccount({ email, password }) {
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/v1/users/reactivate-account`,
+    {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    },
+  );
+
+  const data = await res.json();
+
+  return data;
+}

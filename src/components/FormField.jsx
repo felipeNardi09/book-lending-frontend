@@ -26,7 +26,7 @@ export default function FormField({
           {...register(id, options)}
           type={type}
           id={id}
-          className="block basis-8/12 border bg-emerald-50 px-2 py-1 text-sm text-emerald-900"
+          className="block basis-8/12 border bg-emerald-50 p-2 text-sm text-emerald-900"
           placeholder={placeholder}
         />
       ) : (
@@ -34,9 +34,9 @@ export default function FormField({
           {...register(id, options)}
           type={type}
           id={id}
-          className="block basis-9/12 border bg-emerald-50 px-2 py-1 text-sm text-emerald-900"
+          className="block basis-9/12 border bg-emerald-50 p-2 text-sm text-emerald-900"
           placeholder={placeholder}
-          rows={5}
+          rows={1}
         />
       )}
     </div>

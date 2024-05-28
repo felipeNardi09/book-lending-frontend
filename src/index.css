@@ -10,5 +10,5 @@
   background: rgb(169, 169, 170);
 }
 ::-webkit-scrollbar-track {
-  background-color: rgb(202, 202, 202);
+  display: none;
 }

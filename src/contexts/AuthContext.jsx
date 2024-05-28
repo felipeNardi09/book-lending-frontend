@@ -5,13 +5,9 @@ const AuthContext = createContext(undefined);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(undefined);
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, isLoading, setIsLoading, setError, error }}
-    >
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

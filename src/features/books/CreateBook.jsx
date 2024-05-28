@@ -1,27 +1,22 @@
+/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import FormField from "../../components/FormField.jsx";
 import Button from "../../components/Button.jsx";
 import { useCreateBook } from "./useCreateBook.js";
 import SmallSpinner from "../../components/SmallSpinner.jsx";
 
-export default function CreateBook() {
+export default function CreateBook({ setToggleModal }) {
   const { register, handleSubmit } = useForm();
 
-  const { addBook, isPending } = useCreateBook();
+  const { addBook, error, isPending } = useCreateBook();
 
   return (
-    <div className="col-start-1 col-end-2 ml-7 flex max-w-[90%] flex-col justify-center">
-      <h2 className="mb-2 block text-center font-semibold underline">
-        New book
-      </h2>
+    <div>
+      <h2 className="m-2 text-center font-semibold">New book</h2>
       <form
-        className="flex flex-col gap-2"
+        className="grid grid-cols-2 grid-rows-4"
         onSubmit={handleSubmit((data) => {
-          console.log({
-            ...data,
-            numberOfCopies: Number(data.numberOfCopies),
-            numOfPages: Number(data.numberOfPages),
-          });
+          setToggleModal(false);
 
           return addBook({
             ...data,
@@ -48,6 +43,7 @@ export default function CreateBook() {
           label="Genre"
           placeholder="Genre"
         />
+
         <FormField
           htmlTag="input"
           register={register}
@@ -66,6 +62,7 @@ export default function CreateBook() {
           label="Pages"
           placeholder="Number of pages"
         />
+
         <FormField
           htmlTag="input"
           register={register}
@@ -84,6 +81,7 @@ export default function CreateBook() {
           label="Publisher"
           placeholder="Publisher"
         />
+
         <FormField
           htmlTag="input"
           register={register}
@@ -102,6 +100,7 @@ export default function CreateBook() {
           label="Copies"
           placeholder="Number of copies"
         />
+
         <FormField
           register={register}
           htmlFor="synopsis"
@@ -110,12 +109,14 @@ export default function CreateBook() {
           id="synopsis"
           label="Synopsis"
         />
-        <div className="mt-2 flex justify-center">
-          <Button type="primary">
+
+        <div className="flex items-center justify-center">
+          <Button type="secondary">
             <span>{!isPending ? "Add book" : <SmallSpinner />}</span>
           </Button>
         </div>
       </form>
+      {error && <p>{error.message}</p>}
     </div>
   );
 }

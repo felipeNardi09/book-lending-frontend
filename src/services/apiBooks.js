@@ -71,7 +71,7 @@ export async function createBook(
   return data;
 }
 
-export async function deleteBook(id) {
+export async function deleteBook(token, id) {
   const res = await fetch(
     `${import.meta.env.VITE_API_URL}/api/v1/books/delete-book/${id}`,
     {
@@ -79,6 +79,7 @@ export async function deleteBook(id) {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token && `Bearer ${token}`,
       },
     },
   );

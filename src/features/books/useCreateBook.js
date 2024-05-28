@@ -16,18 +16,17 @@ export function useCreateBook() {
     isSuccess,
   } = useMutation({
     mutationFn: (data) => {
-      console.log(data);
-
       return createBook(data, cookies.token);
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries("books");
-      toast.success("Book successfully created");
+      toast("Book successfully creted!", {
+        icon: "🤓",
+        style: { border: "2px solid yellow" },
+      });
     },
     onError: (error) => {
-      console.log(error);
-      toast.error("Something went wrong");
+      toast.error(error.message);
     },
   });
 

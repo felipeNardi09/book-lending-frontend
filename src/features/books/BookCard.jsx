@@ -34,7 +34,7 @@ export default function BookCard({ book }) {
       <p>Copies available: {numberOfCopies}</p>
 
       {!user ? (
-        <NavLink type="toLoginPage" to="/login">
+        <NavLink type="tertiary" to="/login">
           Log in
         </NavLink>
       ) : (
